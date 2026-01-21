@@ -5,9 +5,8 @@ import requests
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 
-from concurrent.futures import ThreadPoolExecutor
 
-# ------------------ FETCH POSTER ------------------
+# fetch poster
 @st.cache_data(show_spinner=False, ttl=3600)
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key=7b7d85ccff8c6b0ee8638d34b633b35e"
@@ -25,7 +24,7 @@ def fetch_poster(movie_id):
     return "https://via.placeholder.com/342x513?text=No+Image"
 
 
-# ------------------ RECOMMEND ------------------
+#RECOMMEND  function
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
@@ -72,7 +71,7 @@ similarity = compute_similarity(movies)
 
 
 # ------------------ STREAMLIT UI ------------------
-st.title('Movie Recommender System')
+st.title("🎬 Movie Recommender System")
 
 selected_movie_name = st.selectbox(
     "select a movie",
